@@ -1,17 +1,15 @@
-# practice-git
+# Project: CLI Task Manager (JSON version)
 
-- [ ] Project: CLI Task Manager (JSON version)
-  - [x] get the user task and show them 
-    - Add task
-    - List tasks
-    - Mark done
-    - Delete task
-    - Store in `tasks.json`
-    - Each task:
-      {
-        "id": 1,
-        "name": "...",
-        "done": false,
-        "priority": 1-5
-      }
-
+  - [x] Get the user task and show them 
+  - [x] Add task to a file
+  - [ ] List tasks
+  - [ ] Mark done
+  - [ ] Delete task
+  - [x] Store in `tasks.json`
+  - [ ] Each task:
+        {
+          "id": 1,
+          "name": "...",
+          "status: "done",
+          "priority": 1-5
+        }

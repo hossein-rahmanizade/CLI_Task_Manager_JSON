@@ -1,14 +1,17 @@
 import json
-import datetime
+import datetime #TODO I'll add timestamp to user's input
+import re
 
-def take_task():
-    user_task = input("Please enter your task, seperate them with ',': ")
-    user_task_split = user_task.split(",")
-    return user_task_split
+user_input= input("Please enter your task, task's priority, task's deadline seperate them with ',': ")
 
-user_list = take_task()
-print(f"\nYou entered {len(user_list)} tasks.\n")
+def take_task(user_task):
+    user_task_split = re.split(r'\s*,\s*', user_task)
+    user_task_keys = ["name", "priority", "deadline"]
+    result = dict(zip(user_task_keys, user_task_split))
+    return result
 
-for index, item in enumerate(user_list, start=1):
-    print(f"{index}-{item}")
+print(f"User's task information is {take_task(user_input)}.")
 
+with open('/tmp/tasks.json', 'w') as file:
+    data = take_task(user_input)
+    json.dump(data, file)
