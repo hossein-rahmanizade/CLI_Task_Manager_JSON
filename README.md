@@ -22,4 +22,4 @@
 - [ ] Handle errors in the take_task() for edge case inputs
 - [ ] Add main and while to keep getting user's input unless user stops it
 - [ ] Add args for faster task taking from terminal, add flags like {"-a":"add task","-d":"delete","-v":"view tasks",...}
-- [ ] Handle the "id" in json file
+- [x] Handle the "id" in json file

@@ -1,14 +1,18 @@
-# import datetime
+from datetime import datetime
 import json
 import os
 import re
 
 user_input= input("Please enter your task, task's priority, task's deadline seperate them with ',': ")
 
+now = datetime.now()
+date_added = now.strftime("%Y-%m-%d %H:%M")
+
 def take_task(user_task):
     user_task_split = re.split(r'\s*,\s*', user_task)
     user_task_keys = ["name", "priority", "deadline"]
     result = dict(zip(user_task_keys, user_task_split))
+    result["date_added"] = date_added
     return result
 
 print(f"User's task information is {take_task(user_input)}.")
