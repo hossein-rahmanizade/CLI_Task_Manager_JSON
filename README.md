@@ -24,5 +24,11 @@
 - [ ] Add args for faster task taking from terminal, add flags like {"-a":"add task","-d":"delete","-v":"view tasks",...}, so to handle this, I need to have 2 general state for my program, one is like main-command-line mode and the other one interactive mode 
 - [x] Handle the "id" in json file
 - [ ] Add 2 more ways to delete tasks, based on priority and based on time like a week old task.
-- [ ] Add descriptive prints at the begining of the code for user to choose.
-- [ ] work on efficient ways to find and delete tasks.
+- [x] Add descriptive prints at the begining of the code for user to choose.
+- [ ] Work on efficient ways to find and delete tasks.
+- [ ] Maybe I should combine take_task() with add_task()!
+- [x] Add a function for file_exist()
+- [ ] Add a smart feature for easier deadline input, like today or tomorrow or weekend or in general how interpret time in the deadline input
+- [ ] Add a function for editing the existing tasks
+- [ ] I also need to figure out how List the task for user, cause the json format is not clean enough here.
+
