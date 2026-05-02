@@ -23,14 +23,11 @@ def task_options_prints():
     print("="*32)
 
 
-user_input= input("Please enter your task's title, task's priority, task's due date seperate them with ',': ")
-
-
 def file_exist(path):
     return os.path.exists(path)
 
 
-def take_task(user_task):
+def parse_task_input(user_task):
     user_task_split = re.split(r'\s*,\s*', user_task)
     user_task_keys = ["title", "priority", "due"]
     result = dict(zip(user_task_keys, user_task_split))
@@ -39,10 +36,10 @@ def take_task(user_task):
     return result
 
 
-def add_task():
+def add_task_to_file(task_input):
     if not file_exist(json_path):
         with open(json_path, 'w') as file:
-            data = take_task(user_input)
+            data = parse_task_input(task_input)
             data["id"] = 1
             json.dump([data], file, indent=4, sort_keys=True)
 
@@ -55,7 +52,7 @@ def add_task():
             
         next_id = max((item['id'] for item in data), default=0) + 1
 
-        new_entry = take_task(user_input)
+        new_entry = parse_task_input(task_input)
         new_entry["id"] = next_id
 
         data.append(new_entry)
@@ -80,6 +77,11 @@ def delete_task(chosen_title):
     return "There's no task here to delete."
 
 
+def view_task():
+    # output should look like this -> [ ] 1. buy coffee (due: 2026-05-03 08:00) (priority: 1) 
+    pass
+
+
 def mark_down_task():
     pass
 
@@ -89,7 +91,26 @@ def interactive_mode():
 
 
 def main():
-    pass
+    while True:
+        task_options_prints()
+        choice = input("Choose option 1-5: ")
 
-task_options_prints()
-add_task()
+        if choice == "1":
+            task_input = input("Enter title, priority, due: ")
+            add_task_to_file(task_input)
+        elif choice == "2":
+            title = input("Enter task name to delete: ")
+            delete_task(title)
+        elif choice == "3":
+            view_task()
+        elif choice == "4":
+            name = input("Enter task name to complete: ") # or id number
+            mark_down_task(name)
+        elif choice == "5":
+            print("Goodbye")
+            break
+        else:
+            print("invalid choice")
+
+
+main()
