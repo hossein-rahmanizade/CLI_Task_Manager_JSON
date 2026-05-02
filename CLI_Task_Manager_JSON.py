@@ -11,7 +11,7 @@ date_added = now.strftime("%Y-%m-%d %H:%M")
 json_path = "/tmp/tasks.json"
 
 
-def task_options_prints():
+def task_options_prints(): # later I need to add edit task to it too.
     print("\n" + "="*32)
     print("        CLI TASK MANAGER")
     print("="*32)
@@ -60,26 +60,38 @@ def add_task_to_file(task_input):
         with open(json_path, 'w') as file:
             json.dump(data, file, indent=4, sort_keys=True)
     
-    print("Your task been added.")
+    print("\nYour task been added.")
 
 
-def delete_task(chosen_title):
+def delete_task(title):
     if file_exist(json_path):
         with open(json_path, 'r') as file:
             data = json.load(file)
+            print()
             for i in range(len(data)-1, -1, -1):
-                if data[i]["title"] == chosen_title:
+                if data[i]["title"] == title:
                     data.pop(i)
 
         with open(json_path, 'w') as file:
             json.dump(data, file, indent=4, sort_keys=True)        
-        return f"You're task {chosen_title} been successfully deleted."    
-    return "There's no task here to delete."
+        print(f"You're task '{title}' been successfully deleted.")
+        
+    else:
+        print("There's no task here to delete.")
 
 
-def view_task():
-    # output should look like this -> [ ] 1. buy coffee (due: 2026-05-03 08:00) (priority: 1) 
-    pass
+def view_task(): # later I add parameters to filter the output like show_all=True
+    if file_exist(json_path):
+        with open(json_path, 'r') as file:
+            data = json.load(file)
+        print()
+        for i in range(len(data)):
+            if not data[i]["done"]:
+                print(f"[ ] {data[i]["id"]}. {data[i]["title"]} (due: {data[i]["due"]}) (priority: {data[i]["priority"]})")
+            else:
+                print(f"[x] {data[i]["id"]}. {data[i]["title"]} (due: {data[i]["due"]}) (priority: {data[i]["priority"]})")
+    else:
+        print("There's no task here to view.")
 
 
 def mark_down_task():
@@ -91,6 +103,7 @@ def interactive_mode():
 
 
 def main():
+
     while True:
         task_options_prints()
         choice = input("Choose option 1-5: ")
