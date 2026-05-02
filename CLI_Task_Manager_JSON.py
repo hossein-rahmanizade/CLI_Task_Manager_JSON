@@ -94,8 +94,24 @@ def view_task(): # later I add parameters to filter the output like show_all=Tru
         print("There's no task here to view.")
 
 
-def mark_down_task():
-    pass
+def mark_down_task(title):
+    if file_exist(json_path):
+        with open(json_path, 'r') as file:
+            data = json.load(file)
+            found = False
+            for i in range(len(data)):
+                if data[i]["title"] == title:
+                    data[i]["done"] = True
+                    found = True
+            if not found:
+                    print(f"There's no task with '{title}' title.")
+        if found:
+            with open(json_path, 'w') as file:
+                json.dump(data, file, indent=4, sort_keys=True)        
+            print(f"You're task '{title}' been successfully completed.")
+
+    else:
+        print("There's no task here to complete.")
 
 
 def interactive_mode():
