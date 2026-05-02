@@ -11,7 +11,8 @@ date_added = now.strftime("%Y-%m-%d %H:%M")
 json_path = "/tmp/tasks.json"
 
 
-def task_options_prints(): # later I need to add edit task to it too.
+def task_options_prints(): # later I need to add edit task option to it too.
+    """Show program's option to the user"""
     print("\n" + "="*32)
     print("        CLI TASK MANAGER")
     print("="*32)
@@ -28,6 +29,7 @@ def file_exist(path):
 
 
 def parse_task_input(user_task):
+    """Change user's input for add_task_to_file() by parsing and adding new items to it."""
     user_task_split = re.split(r'\s*,\s*', user_task)
     user_task_keys = ["title", "priority", "due"]
     result = dict(zip(user_task_keys, user_task_split))
@@ -37,6 +39,8 @@ def parse_task_input(user_task):
 
 
 def add_task_to_file(task_input):
+    """Check if the task.json file exist, and add the dictionary result of the parse_task_input()
+       to the file.if file didn't exist, it make it first and then, add user's parsed input to the file."""
     if not file_exist(json_path):
         with open(json_path, 'w') as file:
             data = parse_task_input(task_input)
@@ -64,6 +68,7 @@ def add_task_to_file(task_input):
 
 
 def delete_task(title):
+    """Get an argument from user's input and delete a task based on it."""
     if file_exist(json_path):
         with open(json_path, 'r') as file:
             data = json.load(file)
@@ -81,6 +86,7 @@ def delete_task(title):
 
 
 def view_task(): # later I add parameters to filter the output like show_all=True
+    """view the list of existing tasks in the json file."""
     if file_exist(json_path):
         with open(json_path, 'r') as file:
             data = json.load(file)
@@ -95,6 +101,7 @@ def view_task(): # later I add parameters to filter the output like show_all=Tru
 
 
 def mark_down_task(title):
+    """Get a name from user input as argument and mark it down by changing the done item into True."""
     if file_exist(json_path):
         with open(json_path, 'r') as file:
             data = json.load(file)
