@@ -4,11 +4,11 @@
 
   - [x] Get the user task and show them 
   - [x] Add task to a file
-  - [ ] List tasks
-  - [ ] Mark done
+  - [x] View tasks
+  - [x] Mark done
   - [x] Delete task
   - [x] Store in `tasks.json`
-  - [ ] Each task:
+  - [x] Each task:
         {
           "id": 1,
           "title": "...",
@@ -35,4 +35,6 @@
 - [ ] I also need to figure out how List the task for user, cause the json format is not clean enough here.
 - [ ] Add docstring to the functions
 - [ ] Work on a better way to enter the due, cause it's a bit annoying to type all the date date and time manually every single time.
+- [ ] Maybe a function to show finished tasks and pending tasks.
+- [ ] Handle errors when the items of a task are missing like when there is no prioriy or due in user's input.
 
