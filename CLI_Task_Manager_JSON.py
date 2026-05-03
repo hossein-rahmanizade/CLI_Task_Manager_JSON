@@ -31,6 +31,8 @@ def file_exist(path):
 def parse_task_input(user_task):
     """Change user's input for add_task_to_file() by parsing and adding new items to it."""
     user_task_split = re.split(r'\s*,\s*', user_task)
+    if len(user_task_split) != 3:
+        return False
     user_task_keys = ["title", "priority", "due"]
     result = dict(zip(user_task_keys, user_task_split))
     result["date_added"] = date_added
@@ -133,7 +135,11 @@ def main():
 
         if choice == "1":
             task_input = input("Enter title, priority, due: ")
-            add_task_to_file(task_input)
+            parsed = parse_task_input(task_input)
+            if parsed:
+                add_task_to_file(task_input)
+            else:
+                print("Invalid format. Use: title, priority, due")
         elif choice == "2":
             title = input("Enter task name to delete: ")
             delete_task(title)
