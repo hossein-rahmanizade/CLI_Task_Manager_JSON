@@ -36,7 +36,7 @@ def Validate_due_date(due_string):
         due_string = "today 23:59"
     elif parsed_due[0] == today:
         due_string = "today" + " " + parsed_due[1]
-    elif parsed_due[0] == tomorrow:
+    elif parsed_due[0] == tomorrow_str:
         due_string = "tomorrow" + " " + parsed_due[1]
     return due_string 
 
