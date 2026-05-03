@@ -1,5 +1,5 @@
 import argparse
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import os
 import re
@@ -8,6 +8,9 @@ import sys
 
 now = datetime.now()
 date_added = now.strftime("%Y-%m-%d %H:%M")
+today = now.strftime("%Y-%m-%d")
+tomorrow = now + timedelta(days=1)
+tomorrow_str = tomorrow.strftime("%Y-%m-%d")
 json_path = "/tmp/tasks.json"
 
 
@@ -27,14 +30,33 @@ def task_options_prints(): # later I need to add edit task option to it too.
 def file_exist(path):
     return os.path.exists(path)
 
+def Validate_due_date(due_string):
+    parsed_due = due_string.split(" ")
+    if not due_string or not due_string.strip():
+        due_string = "today 23:59"
+    elif parsed_due[0] == today:
+        due_string = "today" + " " + parsed_due[1]
+    elif parsed_due[0] == tomorrow:
+        due_string = "tomorrow" + " " + parsed_due[1]
+    return due_string 
+
 
 def parse_task_input(user_task):
     """Change user's input for add_task_to_file() by parsing and adding new items to it."""
     user_task_split = re.split(r'\s*,\s*', user_task)
     if len(user_task_split) != 3:
+        print("X You have to enter all three task requirement")
         return False
     user_task_keys = ["title", "priority", "due"]
     result = dict(zip(user_task_keys, user_task_split))
+    if not result['title'] or not result['title'].strip():
+        print("X Title cannot be empty")
+        return False
+    if result['priority'] not in ["1","2","3","4","5"]:
+        print("X You have to enter the prioriy in a numerical format (1-5)")
+        return False
+    if result["due"]:
+        result["due"] = Validate_due_date(result["due"])
     result["date_added"] = date_added
     result["done"] = False
     return result
