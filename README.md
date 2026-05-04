@@ -23,7 +23,7 @@
 - [x] Need to add timestamp to user's input
 - [x] Handle errors in the parse_task_input() for edge case inputs
 - [x] Add main and while to keep getting user's input unless user stops it
-- [ ] Add args for faster task taking from terminal, add flags like {"-a":"add task","-d":"delete","-v":"view tasks",...}, so to handle this, I need to have 2 general state for my program, one is like main-command-line mode and the other one interactive mode, I will do this on a new branch just to practice git branches. 
+- [x] Add args for faster task taking from terminal, add flags like {"-a":"add task","-d":"delete","-v":"view tasks",...}, so to handle this, I need to have 2 general state for my program, one is like main-command-line mode and the other one interactive mode, I will do this on a new branch just to practice git branches. 
 - [x] Handle the "id" in json file
 - [ ] Add 2 more ways to delete tasks, based on priority and based on time like a week old task.
 - [x] Add descriptive prints at the begining of the code for user to choose.

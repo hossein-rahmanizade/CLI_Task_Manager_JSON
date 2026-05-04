@@ -12,7 +12,11 @@ today = now.strftime("%Y-%m-%d")
 tomorrow = now + timedelta(days=1)
 tomorrow_str = tomorrow.strftime("%Y-%m-%d")
 json_path = "/tmp/tasks.json"
-
+cmd_parser = argparse.ArgumentParser()
+cmd_parser.add_argument("-a", "--add", help= "Add task in this format with dqoutes: \"title, priority, due\".")
+cmd_parser.add_argument("-v", "--view", action = "store_true", help = "View Tasks")
+cmd_parser.add_argument("-d", "--delete", help= "Enter the title of the task in dqoutes, view tasks first for checking you tasks first.")
+cmd_parser.add_argument("-m", "--markdown", help= "Enter the title of the task in dqoutes, view tasks first for checking you tasks first.")
 
 def task_options_prints(): # later I need to add edit task option to it too.
     """Show program's option to the user"""
@@ -145,11 +149,6 @@ def mark_down_task(title):
 
 
 def interactive_mode():
-    pass
-
-
-def main():
-
     while True:
         task_options_prints()
         choice = input("Choose option 1-5: ")
@@ -176,4 +175,22 @@ def main():
             print("invalid choice")
 
 
-main()
+def main():
+    
+    args = cmd_parser.parse_args()
+    if args.add or args.view or args.delete or args.markdown:
+        if args.add:
+            add_task_to_file(args.add)
+        if args.view:
+            view_task()
+        if args.delete:
+            delete_task(args.delete)
+        if args.markdown:
+            mark_down_task(args.markdown)
+
+    else:
+        interactive_mode()
+
+
+if __name__ == "__main__":
+    main()
