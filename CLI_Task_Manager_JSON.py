@@ -55,8 +55,7 @@ def parse_task_input(user_task):
     if result['priority'] not in ["1","2","3","4","5"]:
         print("X You have to enter the prioriy in a numerical format (1-5)")
         return False
-    if result["due"]:
-        result["due"] = Validate_due_date(result["due"])
+    result["due"] = Validate_due_date(result.get("due", ""))
     result["date_added"] = date_added
     result["done"] = False
     return result
